@@ -1,10 +1,55 @@
+import 'dart:convert';
 import 'dart:ui';
-
+import 'package:my_second_app/hourly_forecast_item.dart';
 import 'package:flutter/material.dart';
+import 'package:my_second_app/secrets.dart';
+import 'additional_information.dart';
+import 'package:http/http.dart' as http;
 
-class WeatherScreen extends StatelessWidget {
+
+
+
+class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
 
+  @override
+  State<WeatherScreen> createState() => _WeatherScreenState();
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+    double temp = 0;
+
+
+   @override
+  void initState() {
+    super.initState();
+    getCurrentWeather();
+  }
+
+
+  Future getCurrentWeather() async{
+
+    try{
+      String cityName = "London";
+      final result = await http.get(
+      Uri.parse("http://api.openweathermap.org/data/2.5/weather?q=$cityName&APPID=$ApiKey"),
+    );
+
+    // print(result.body);
+
+    final data = jsonDecode(result.body);
+    setState(() {
+      temp = data["main"]["temp"];
+    });
+    }
+    catch(e){
+      throw e.toString();
+    }
+    
+
+
+ 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +61,15 @@ class WeatherScreen extends StatelessWidget {
         actions:  [
           IconButton(onPressed: (){
 
-
           }, 
           icon: Icon(Icons.refresh),
           ),
 
         ],
       ),
-
-      body: Padding(
+      
+      body: temp == 0 ? const LinearProgressIndicator() :
+      Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +96,7 @@ class WeatherScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
-                          Text('360 F',
+                          Text('$temp K',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -90,11 +135,13 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                    HourlyForecastItem(),
-                    HourlyForecastItem(),
-                    HourlyForecastItem(),
-                    HourlyForecastItem(),
-                    HourlyForecastItem(),
+                    HourlyForecastItem(icon: Icons.cloud,time: "09:00",temperature: "301.54",),
+                    HourlyForecastItem(icon: Icons.cloud,time: "09:00",temperature: "301.54",),
+                    HourlyForecastItem(icon: Icons.cloud,time: "09:00",temperature: "301.54",),
+                    HourlyForecastItem(icon: Icons.cloud,time: "09:00",temperature: "301.54",),
+                    HourlyForecastItem(icon: Icons.cloud,time: "09:00",temperature: "301.54",),
+
+              
                 ],
                 
               
@@ -111,93 +158,21 @@ class WeatherScreen extends StatelessWidget {
               ),
               
             ),
+            const SizedBox(height: 20),
 
-            SingleChildScrollView(
-
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Container(
-              
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Icon(Icons.water_drop, size: 40,),
-                        const SizedBox(height: 10),
-                        Text('Humidity',style: TextStyle(fontSize: 18),),
-                        const SizedBox(height: 10),
-                        Text('94',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                  ),
-                   const SizedBox(width: 40),
-                    Container(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Icon(Icons.wind_power_outlined, size: 40,),
-                        const SizedBox(height: 10),
-                        Text('WindSpeed',style: TextStyle(fontSize: 18),),
-                        const SizedBox(height: 10),
-                        Text('7.67',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                  ),
-                     const SizedBox(width: 40),
-                       Container(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Icon(Icons.upcoming, size: 40,),
-                        const SizedBox(height: 10),
-                        Text('Pressure',style: TextStyle(fontSize: 18),),
-                        const SizedBox(height: 10),
-                        Text('1006',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
+           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AdditionInformation(icon: Icons.water_drop,label: "Humidity",value: "94",),
+              AdditionInformation(icon: Icons.air,label: "WindSpeed",value:"7.5"),
+              AdditionInformation(icon: Icons.beach_access,label: "Pressure",value: "1006",),
+            ],
+           )
         
           ],
         ),
       ),
     
     );
-  }
-}
-
-
-class HourlyForecastItem extends StatelessWidget {
-  const HourlyForecastItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return  Card(
-                    elevation: 6,
-                   
-                    child: Container(
-                      width: 100,
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12)
-                      ), 
-                      child: Column(
-                       children: [
-                        Text('09:00',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                         SizedBox(height: 8),
-                                
-                        Icon(Icons.cloud,size: 35,),
-                                
-                         SizedBox(height: 8),
-                        Text('301.54',style: TextStyle(fontSize: 16),)
-                       ],
-                      ),
-                    ),
-                  );
-              
-
-
   }
 }
