@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/Users/rajesh/Development/project/my_second_app/linux"
+    "cmake.sourceDirectory": "/Users/rajesh/Development/project/my_second_app/linux",
+    "cSpell.ignoreWords": [
+        "bata"
+    ]
 }
