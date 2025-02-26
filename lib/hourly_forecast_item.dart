@@ -29,13 +29,22 @@ class HourlyForecastItem extends StatelessWidget {
                       ), 
                       child: Column(
                        children: [
-                        Text(time,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                        Text(time,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+
+                        ),
                          SizedBox(height: 8),
                                 
-                        Icon(icon,size: 35,),
+                        Icon(icon,size: 35),
+                        
                                 
                          SizedBox(height: 8),
-                        Text(temperature,style: TextStyle(fontSize: 16),)
+                        Text(temperature,style: TextStyle(fontSize: 16),
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                       
+                        )
                        ],
                       ),
                     ),
