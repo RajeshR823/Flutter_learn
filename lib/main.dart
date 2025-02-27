@@ -1,9 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_second_app/shopping/home_shop.dart';
 import 'package:my_second_app/currency_converter/cupertino_currency_converter.dart';
 import 'package:my_second_app/currency_converter/currency_converter_material.dart';
+import 'package:my_second_app/shopping/global_shop_variable.dart';
 import 'package:my_second_app/weather/wather_screen.dart';
 import 'package:my_second_app/shopping/product_detail_page.dart';
 
@@ -78,15 +78,23 @@ class ShoppingApp extends StatelessWidget {
 
          
         ),
+        
         textTheme: TextTheme(
+          titleLarge: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 34,
+                    ),
           titleMedium: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
+          
           bodySmall: TextStyle(
              fontWeight: FontWeight.bold,
               fontSize: 16,
           ),
+
+         
         ),
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
@@ -97,7 +105,9 @@ class ShoppingApp extends StatelessWidget {
         useMaterial3: true
       ),
       
-      home: ProductInformation(),
+      home: ProductInformation(
+         product: products[0],
+      ),
     );
   }
 }
