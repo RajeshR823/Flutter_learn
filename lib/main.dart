@@ -1,6 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_second_app/POC/secured_storage.dart';
+import 'package:my_second_app/POC/shared_prefrence.dart';
 import 'package:my_second_app/currency_converter/cupertino_currency_converter.dart';
 import 'package:my_second_app/currency_converter/currency_converter_material.dart';
 import 'package:my_second_app/shopping/cart_provider.dart';
@@ -10,11 +11,12 @@ import 'package:provider/provider.dart';
 
 
 void main(){
-  runApp(const ShoppingApp());
+  runApp( Secured());
 }
 
 
 
+///---------------------------Currency Converter  Learning----------------------------------
 
 class myApp extends StatelessWidget{
   const myApp ({super.key}); //key helps Flutter identify widgets uniquely in the widget tree for efficient updates.
@@ -29,6 +31,8 @@ class myApp extends StatelessWidget{
     );
   }
 }
+
+///---------------------------Cupertino Learning----------------------------------
 
 class MyCupertinoApp extends StatelessWidget {
   const MyCupertinoApp({super.key});
@@ -45,6 +49,7 @@ class MyCupertinoApp extends StatelessWidget {
   }
 }
 
+///---------------------------Weather App learning----------------------------------
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -59,6 +64,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
+///---------------------------shopping app ----------------------------------
 
 class ShoppingApp extends StatelessWidget {
   const ShoppingApp({super.key});
@@ -117,32 +125,28 @@ class ShoppingApp extends StatelessWidget {
 }
 
 
+///---------------------------Shared Prefrence ----------------------------------
+
+class Storing extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home:HomeStorePage(),
+    );
+  }
+}
 
 
 
+///---------------------------secured Storeage ----------------------------------
+
+class Secured extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home:SecureStoragePage(),
+    );
+  }
+}
 
 
-
-
-
-
-
-///------------------------------------------------------
-///widget tree
-/// Metarial
-/// |
-/// |
-/// ____ Scaffold
-///           |
-///           |
-///           ____ center 
-///                    |
-///                    |__ Text
-/// 
-/// 
-/// 
-/// 
-/// provider :
-/// Change Notified Provider
-/// Future Provider
-/// Stream provider
