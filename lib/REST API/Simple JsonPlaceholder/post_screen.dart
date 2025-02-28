@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_second_app/REST API/api_service.dart';
+import 'package:my_second_app/REST API/Simple JsonPlaceholder/api_service.dart';
 
 class PostScreen extends StatefulWidget {
   @override

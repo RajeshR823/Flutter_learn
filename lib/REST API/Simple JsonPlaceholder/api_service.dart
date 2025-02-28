@@ -48,6 +48,7 @@ class ApiService {
   // DELETE request to delete a post
   Future<void> deletePost(int id) async {
     final response = await http.delete(Uri.parse("$baseUrl/posts/$id"));
+  
 
     if (response.statusCode != 200) {
       throw Exception("Failed to delete post");
