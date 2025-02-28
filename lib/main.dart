@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_second_app/POC/secured_storage.dart';
-import 'package:my_second_app/POC/shared_prefrence.dart';
+import 'package:my_second_app/Storage/secured_storage.dart';
+import 'package:my_second_app/Storage/shared_prefrence.dart';
 import 'package:my_second_app/currency_converter/cupertino_currency_converter.dart';
 import 'package:my_second_app/currency_converter/currency_converter_material.dart';
 import 'package:my_second_app/shopping/cart_provider.dart';
 import 'package:my_second_app/shopping/home_shop.dart';
 import 'package:my_second_app/weather/wather_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:my_second_app/REST API/post_screen.dart';
 
 
 void main(){
-  runApp( Secured());
+  runApp( RestApi());
 }
 
 
@@ -150,3 +151,19 @@ class Secured extends StatelessWidget {
 }
 
 
+///---------------------------Rest API----------------------------------
+
+class RestApi extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter REST API',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: PostScreen(),
+    );
+  }
+}
+
+
+
+///-------------------------------------------------------------
